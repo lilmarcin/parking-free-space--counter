@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 while True:
-    img = cv2.imread('car_parking_random_frame.png', -1)
+    img = cv2.imread('/images/car_parking_random_frame.png', -1)
 
     rgb_planes = cv2.split(img)
 

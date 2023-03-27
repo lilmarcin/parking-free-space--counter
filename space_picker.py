@@ -7,7 +7,7 @@ pt1_x, pt1_y, pt2_x, pt2_y = None, None, None, None
 line_count = 0
 
 try:
-    with open('parking_positions', 'rb') as f:
+    with open('/src/parking_positions', 'rb') as f:
         parking_pos = pickle.load(f)
 except:
     parking_pos = []
