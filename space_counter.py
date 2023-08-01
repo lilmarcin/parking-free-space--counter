@@ -12,7 +12,7 @@ with open('parking_positions', 'rb') as f:
     parking_positions = pickle.load(f)
 
 # Parking position parameters
-width, height = 13, 26
+width, height = 18, 30
 area = width * height
 empty = 0.25
 
@@ -22,10 +22,10 @@ def space_counter(img):
     counter = 0
 
     for position in parking_positions:
-        x, y = position
+        x1, y1, x2, y2 = position
 
         # Crop parking position and count occupied pixels
-        img_crop = img[y:y + height, x:x + width]
+        img_crop = img[y1:y2, x1:x2]
         count = cv2.countNonZero(img_crop)
 
         occupied_area = count / area
@@ -43,8 +43,7 @@ def space_counter(img):
         else:
             color = [0, 0, 255]
 
-        cv2.rectangle(frame, position, (position[0] + width, position[1] + height), color, 1)
-
+        cv2.rectangle(frame, (x1, y1), (x2, y2), color, 1)
 
 if not cap.isOpened():
     print("Cannot open camera")
@@ -54,6 +53,7 @@ while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
 
+    frame = cv2.resize(frame, (1600, 900))
     # Frame processing
     # Gray scaling
     img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -75,7 +75,8 @@ while True:
     cv2.putText(frame_new, f"Free: {counter}/{len(parking_positions)}", (0, 20), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1.25, (0, 0, 0), 2)
 
     cv2.namedWindow('frame', cv2.WINDOW_NORMAL)
-    cv2.setWindowProperty('frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.setWindowProperty('frame', cv2.WINDOW_NORMAL, cv2.WINDOW_NORMAL)
+    cv2.resizeWindow('frame', 1600, 900)
 
     cv2.imshow('frame', frame_new)
     # cv2.imshow('image_blur', img_blur)
