@@ -1,9 +1,10 @@
 # Parking-free-space--counter using OpenCV and Python
 
 Color labels:
-green - free space
-orange - partially occupied place (shadows/shifted frame)
-red - occupied place
+
+- green - free space
+- orange - partially occupied place (shadows/shifted frame)
+- red - occupied place
 # Busy space
 
 ![space_counter](https://raw.githubusercontent.com/lilmarcin/parking-free-space--counter/master/parking_counter1.png)
